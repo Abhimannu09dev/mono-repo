@@ -1,8 +1,8 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 
 interface IFolder {
   name: string;
-  userId?: string;
+  userId?: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
