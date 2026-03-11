@@ -30,7 +30,7 @@ const fileFilter = (
   if (allowedTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error("Invalid file type"));
+    cb(null, false);
   }
 };
 
