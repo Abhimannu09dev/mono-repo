@@ -15,9 +15,11 @@ export const protect = (req: Request, res: Response, next: NextFunction) => {
     }
 
     const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, JWT_SECRET) as { id: string };
-
-    (req as any).user = decoded;
+    const decoded = jwt.verify(token, JWT_SECRET) as {
+      id: string;
+      email: string;
+    };
+    req.user = decoded;
     next();
   } catch (error) {
     res.status(401).json({
