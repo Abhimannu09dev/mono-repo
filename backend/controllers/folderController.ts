@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Folder from "../models/folderSchema";
 
-export const createFolder = async (req: Request, res: Response) => {
+export const  createFolder = async (req: Request, res: Response) => {
   try {
     const { name } = req.body;
 

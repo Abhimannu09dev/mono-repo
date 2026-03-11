@@ -7,8 +7,8 @@ import {
 
 const router = Router();
 
-router.post("/folders", createFolder);
-router.get("/folders", getFolders);
-router.delete("/folders/:id", deleteFolder);
+router.post("/create", createFolder);
+router.get("/get", getFolders);
+router.delete("/delete/:id", deleteFolder);
 
 export default router;
