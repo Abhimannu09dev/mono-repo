@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Folder from "../models/folderSchema";
 
-export const  createFolder = async (req: Request, res: Response) => {
+export const createFolder = async (req: Request, res: Response) => {
   try {
     const { name } = req.body;
 
@@ -31,16 +31,16 @@ export const getFolders = async (req: Request, res: Response) => {
       return res.status(401).json({ success: false, message: "Unauthorized" });
     }
 
-    const folder = await Folder.findById(decodedToken.id);
-    if (!folder) {
+    const folders = await Folder.find({ userId: decodedToken.id });
+    if (!folders || folders.length === 0) {
       return res
         .status(404)
-        .json({ success: false, message: "Folder not found" });
+        .json({ success: false, message: "Folders not found" });
     }
     res.json({
       success: true,
-      message: "Folder retrieved successfully",
-      data: { folder },
+      message: "Folders retrieved successfully",
+      data: { folders },
     });
   } catch (error: any) {
     console.error("Error fetching folder:", error);

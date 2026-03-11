@@ -4,11 +4,12 @@ import {
   deleteFolder,
   getFolders,
 } from "../controllers/folderController";
+import { protect } from "../middlewares/auth.middleware";
 
 const router = Router();
 
-router.post("/create", createFolder);
-router.get("/get", getFolders);
-router.delete("/delete/:id", deleteFolder);
+router.post("/create", protect, createFolder);
+router.get("/get", protect, getFolders);
+router.delete("/delete/:id", protect, deleteFolder);
 
 export default router;
