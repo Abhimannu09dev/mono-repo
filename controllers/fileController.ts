@@ -52,3 +52,27 @@ export const uploadFile = async (req: Request, res: Response) => {
   }
 };
 
+export const getMyFiles = async (req: Request, res: Response) => {
+  try {
+    const userId = req.user!.id;
+    const { folderId } = req.query;
+
+    // Build query dynamically — filter by folder only if provided
+    const query: any = { userId };
+    if (folderId) query.folderId = folderId;
+
+    const files = await File.find(query).sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      message: "Files retrieved successfully",
+      data: { files },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error processing request",
+      error: (error as Error).message,
+    });
+  }
+};
