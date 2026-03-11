@@ -76,3 +76,37 @@ export const getMyFiles = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const deleteFile = async (req: Request, res: Response) => {
+  try {
+    const userId = req.user!.id;
+    const { fileId } = req.params;
+
+    const file = await File.findOneAndDelete({ _id: fileId, userId });
+
+    if (!file) {
+      return res.status(404).json({
+        success: false,
+        message: "Error processing request",
+        error: "File not found",
+      });
+    }
+
+    // Delete the actual file from disk
+    if (fs.existsSync(file.path)) {
+      fs.unlinkSync(file.path);
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "File deleted successfully",
+      data: {},
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error processing request",
+      error: (error as Error).message,
+    });
+  }
+};

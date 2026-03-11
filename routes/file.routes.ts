@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   uploadFile,
   getMyFiles,
+  deleteFile,
 } from "../controllers/fileController";
 import { protect } from "../middlewares/auth.middleware";
 import { upload } from "../utils/multer";
@@ -12,5 +13,6 @@ router.use(protect);
 
 router.post("/", upload.single("file"), uploadFile);
 router.get("/", getMyFiles);
+router.delete("/:fileId", deleteFile);
 
 export default router;
