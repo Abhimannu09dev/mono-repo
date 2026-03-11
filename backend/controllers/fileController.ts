@@ -12,7 +12,7 @@ export const uploadFile = async (req: Request, res: Response) => {
       return res.status(400).json({
         success: false,
         message: "Error processing request",
-        error: "No file uploaded",
+        error: "No file uploaded or file type not allowed",
       });
     }
 
