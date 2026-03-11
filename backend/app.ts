@@ -1,11 +1,17 @@
 import express, { Application, Request, Response } from "express";
+import cors from "cors";
 import authRoutes from "./routes/auth.routes";
 import folderRoutes from "./routes/folder.routes";
 import fileRoutes from "./routes/file.routes";
 import shareRoutes from "./routes/share.routes";
 
 const app: Application = express();
-
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/folders", folderRoutes);
