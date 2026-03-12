@@ -1,6 +1,6 @@
 # 📁 File Management Application
 
-A full-stack file management application with authentication, folder management, file uploads, and file sharing.
+A backend focused file management application with authentication, folder management, file uploads, and file sharing as well as basic frontend.
 
 ---
 
